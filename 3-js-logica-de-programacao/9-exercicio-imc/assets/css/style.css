@@ -62,3 +62,14 @@ table {
     text-align: left;
 }
 
+label#mensagem.Red{
+    display: block;
+    background-color: #ef3a3a;
+    width: 100%;
+}
+
+label#mensagem.Green{
+    display: block;
+    background-color: #6ac048;
+    width: 100%;
+}
