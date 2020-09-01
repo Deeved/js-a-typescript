@@ -20,7 +20,7 @@ section.appendChild(div)
 
 
 /* usando o for in
-    for (const item in elementos) {
+    for (let item in elementos) {
         let { tag, texto } = elementos[item]
         let element = document.createElement(tag)
         elementText = document.createTextNode(texto)
