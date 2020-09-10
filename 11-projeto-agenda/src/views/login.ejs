@@ -9,11 +9,11 @@
       <h1 class="text-center">Criar conta ou Entrar</h1>
       <p class="text-center lead">Faça login ou crie sua conta abaixo:</p>
 
-      <div class="row">
-        
+      <%- include('includes/messages') %>
+
+      <div class="row">        
         <div class="col-lg">
           <h4>Crie sua conta</h4>
-          
           <form action="/login/register" method="POST" >
             <input type="hidden" name="_csrf" value=<%= csrfToken %> >
             <div class="form-group">
