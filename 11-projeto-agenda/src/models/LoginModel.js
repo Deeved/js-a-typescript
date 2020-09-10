@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const { IgnorePlugin } = require('webpack');
 const { use } = require('../../routes');
-const bcryptjs = require('bcryptjs')
+const bcryptjs = require('bcryptjs');
+const { async } = require('regenerator-runtime');
 
 
 const LoginSchema = new mongoose.Schema({
@@ -24,9 +25,13 @@ class Login {
 
     if(this.errors.length > 0 ) return
 
-    try {
-      const salt = bcryptjs.genSaltSync()
-      this.body.password = bcryptjs.hashSync(this.body.password, salt)
+    await this.userExists()
+    
+    if(this.errors.length > 0 ) return
+
+    const salt = bcryptjs.genSaltSync()
+    this.body.password = bcryptjs.hashSync(this.body.password, salt)
+    try {  
       this.user = await LoginModel.create(this.body)
     } catch (error) {
       console.log(error)
@@ -34,6 +39,11 @@ class Login {
 
   }
   
+  async userExists(){
+    const user = await LoginModel.findOne({ email: this.body.email })
+    if(user) this.errors.push('Usuário já existe.')
+  }
+
   valida() {
     //validação
     this.cleanUP()
