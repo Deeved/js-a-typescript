@@ -58,3 +58,13 @@ exports.edit = async function(req, res){
         res.render('404')
     }
 }
+
+exports.delete = async(req, res) => {
+    if(!req.params.id) return res.render('404')
+
+    const contato = await Contato.delete(req.params.id)
+    
+    req.flash('success', 'Contato excluído com sucesso.')
+    req.session.save(() => res.redirect(`back`))
+    return
+}

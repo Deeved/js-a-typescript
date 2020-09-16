@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-mongoose.connect(process.env.CONNECTIONSTRING, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
+mongoose.connect(process.env.CONNECTIONSTRING, { 
+  useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false 
+}).then(() => {
     app.emit('pronto');
   })
   .catch(e => console.log(e));

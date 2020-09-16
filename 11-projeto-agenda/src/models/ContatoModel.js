@@ -62,7 +62,6 @@ Contato.prototype.cleanUP = function()  {
     email: this.body.email,
     fone: this.body.fone,
   }
-
 }
 
 Contato.prototype.edit = async function(id) {
@@ -70,6 +69,16 @@ Contato.prototype.edit = async function(id) {
   this.valida()
   if(this.errors.length > 0) return
   this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new:true })
+}
+
+Contato.buscaContatos = async function() {
+  const contatos = await ContatoModel.find().sort({ createdIn: -1 })
+  return contatos
+}
+
+Contato.delete = async function(id){
+  const contato =  await ContatoModel.findByIdAndDelete(id)
+  return contato
 }
 
 module.exports = Contato;
